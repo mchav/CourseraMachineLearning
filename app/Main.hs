@@ -17,21 +17,13 @@ import LinearRegression
 import Numeric.LinearAlgebra
 import Prelude hiding ((<>))
 import System.Directory
-import Util (plot, zeros, ones)
+import Util
 
 -- replace this with the path to your data.
 exerciseOneDataOne :: IO String
 exerciseOneDataOne = do
   home <- getHomeDirectory
   return (home ++ "/code/haskell/CourseraMachineLearning/app/ex1data1.txt")
-
-plotPoints :: [Double] -> [Double] -> Plot2D.T Double Double
-plotPoints x y = Plot2D.function Graph2D.points x lookupValue
-  where lookupValue v = maybe 0 id (lookup v (zip x y))
-  
-plotLine :: [Double] -> [Double] -> Plot2D.T Double Double
-plotLine x y = Plot2D.function Graph2D.lines x lookupValue
-  where lookupValue v = maybe 0 id (lookup v (zip x y))
 
 exerciseOne = do
   -- Part 1: Basic function
