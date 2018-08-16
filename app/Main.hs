@@ -60,7 +60,7 @@ exerciseOne = do
   putStrLn "Expected cost value (approx) 54.24"
 
   putStrLn "Running Gradient Descent ..."
-  let thetaOpt = gradientDescent  x y theta alpha iterations
+  let (costHist, thetaOpt) = gradientDescent  x y theta alpha iterations
   putStrLn ("Theta found by gradient descent: " ++ show thetaOpt)
   putStrLn "Expected theta values (approx)\n"
   putStrLn " -3.6303\n  1.1664"
@@ -95,12 +95,14 @@ exerciseOneOptional = do
   let x = ones m 1 ||| xNorm
 
   let theta = zeros 3 1
-  let iterations = 50
+  let iterations = 50 :: Int
   let alpha = 1
 
   -- TODO(mchav): Include cost history in gradient descent function and then plot it.
-  let thetaOpt = gradientDescent x y theta alpha iterations
+  let (costHist, thetaOpt) = gradientDescent x y theta alpha iterations
   putStrLn ("Theta found by gradient descent: " ++ show thetaOpt)
+  -- Plot the graph ingoring the first (zeroth) iteration.
+  GP.plotSync DefaultTerm.cons $ plotLine [1..(fromIntegral iterations)] ((tail . reverse) costHist)
   putStrLn "Predicted price of a 1650 sq-ft, 3 br house (using gradient descent)"
   let xTest = ones 1 1 ||| ((row [1650, 3] - mu) / sigma)
   print (xTest <> thetaOpt)
