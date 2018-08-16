@@ -2,8 +2,10 @@
 {-# LANGUAGE FlexibleInstances #-}
 module LinearRegression where
 
+import qualified Data.Vector as V
 import Numeric.LinearAlgebra
 import Prelude hiding ((<>))
+import Statistics.Sample
 
 computeCost :: Matrix Double -- Features
             -> Matrix Double -- Labels
@@ -43,6 +45,13 @@ gradientDescent' x y theta alpha tolerance hist
           step = (scalar alpha) * ((tr' x) <> ((x <> theta) - y)) / (scalar m)
           m = fromIntegral ((fst . size) y)
 
+featureNormalize :: Matrix Double -> (Matrix Double, Matrix Double, Matrix Double)
+featureNormalize x = ((x - mu) / sigma, mu, sigma)
+  where values = map (V.fromList . toList) (toColumns x)
+        mu = row $ map mean values
+        sigma = row $ map stdDev values
+        (rows, columns) = size x
 
-
+normalEquation :: Matrix Double -> Matrix Double -> Matrix Double
+normalEquation x y = (pinvTol 1e-2 (tr' x <> x)) <> (tr' x) <> y
 

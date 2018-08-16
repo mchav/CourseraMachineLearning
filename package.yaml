@@ -24,6 +24,8 @@ dependencies:
 - hmatrix
 - gnuplot
 - directory
+- statistics
+- vector
 
 library:
   source-dirs: src
