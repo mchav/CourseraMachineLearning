@@ -1,5 +1,6 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE RecordWildCards #-}
 module LinearRegression where
 
 import qualified Data.Vector as V
@@ -7,10 +8,10 @@ import Numeric.LinearAlgebra
 import Prelude hiding ((<>))
 import Util
 
-data HyperParameters = HyperParam { theta :: Matrix Double
-                                  , alpha :: Double
-                                  , maxIterations :: Int
-                                  , tolerance :: Double }
+data HyperParameters = HyperParams { theta :: Matrix Double
+                                   , alpha :: Double
+                                   , maxIterations :: Int
+                                   , tolerance :: Double }
 
 computeCost :: Matrix Double -- Features
             -> Matrix Double -- Labels

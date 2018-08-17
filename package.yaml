@@ -26,6 +26,8 @@ dependencies:
 - directory
 - statistics
 - vector
+- ihaskell
+- ihaskell-gnuplot
 
 library:
   source-dirs: src
@@ -51,3 +53,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - CourseraMachineLearning
+

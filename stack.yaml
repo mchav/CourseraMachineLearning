@@ -18,7 +18,9 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-12.6
+resolver: lts-11.21
+ghc-options:
+  hmatrix: -opta-Wa,-mrelax-relocations=no
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -39,6 +41,19 @@ packages:
 # using the same syntax as the packages field.
 # (e.g., acme-missiles-0.3)
 # extra-deps: [hmatrix, gnuplot]
+extra-deps:
+- ihaskell-gnuplot-0.1.0.1
+- diagrams-1.4
+- diagrams-cairo-1.4.1
+- diagrams-lib-1.4.2.3
+- diagrams-contrib-1.4.3
+- diagrams-core-1.4.1.1
+- diagrams-solve-0.1.1
+- diagrams-svg-1.4.2
+- dual-tree-0.2.2
+- cubicbezier-0.6.0.5
+- fast-math-1.0.2
+- mfsolve-0.3.2.0
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

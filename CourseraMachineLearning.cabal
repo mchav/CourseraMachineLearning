@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d38d44741487ae9309adabd921b9d1497accc4cc1144b39aff8dd482e83ca28d
+-- hash: b3522ccf4cae210f978bf01a76f71003ca9f1e0e1cf067376b342c9986a4d2fb
 
 name:           CourseraMachineLearning
 version:        0.1.0.0
@@ -37,6 +37,8 @@ library
     , directory
     , gnuplot
     , hmatrix
+    , ihaskell
+    , ihaskell-gnuplot
     , statistics
     , vector
   default-language: Haskell2010
@@ -54,6 +56,8 @@ executable CourseraMachineLearning-exe
     , directory
     , gnuplot
     , hmatrix
+    , ihaskell
+    , ihaskell-gnuplot
     , statistics
     , vector
   default-language: Haskell2010
@@ -72,6 +76,8 @@ test-suite CourseraMachineLearning-test
     , directory
     , gnuplot
     , hmatrix
+    , ihaskell
+    , ihaskell-gnuplot
     , statistics
     , vector
   default-language: Haskell2010
