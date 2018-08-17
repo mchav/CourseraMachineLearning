@@ -2,7 +2,7 @@
 module Util where
 
 
-import qualified Data.Vector as V
+import qualified Data.Vector.Storable as V
 import qualified Graphics.Gnuplot.Plot.ThreeDimensional as Plot3D
 import qualified Graphics.Gnuplot.Graph.ThreeDimensional as Graph3D
 
@@ -22,7 +22,7 @@ zeros m n = nums m n 0
 ones  m n = nums m n 1
 
 columnStats :: (V.Vector Double -> Double) -> Matrix Double -> Matrix Double
-columnStats f x = row $ map f (map (V.fromList . toList) (toColumns x))
+columnStats f x = row $ map f (toColumns x)
 
 mean, std :: Matrix Double -> Matrix Double
 mean = columnStats Stats.mean
