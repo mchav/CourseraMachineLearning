@@ -28,6 +28,11 @@ dependencies:
 - vector
 - ihaskell
 - ihaskell-gnuplot
+- hmatrix-csv
+- bytestring
+- cassava
+- QuickCheck
+- deepseq
 
 library:
   source-dirs: src

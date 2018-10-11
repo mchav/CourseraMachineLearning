@@ -54,6 +54,7 @@ extra-deps:
 - cubicbezier-0.6.0.5
 - fast-math-1.0.2
 - mfsolve-0.3.2.0
+- hmatrix-csv-0.1.0.2
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

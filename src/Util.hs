@@ -21,12 +21,12 @@ zeros, ones :: Int -> Int -> Matrix Double
 zeros m n = nums m n 0
 ones  m n = nums m n 1
 
-columnStats :: (V.Vector Double -> Double) -> Matrix Double -> Matrix Double
-columnStats f x = row $ map f (toColumns x)
+columnWise :: (V.Vector Double -> Double) -> Matrix Double -> Matrix Double
+columnWise f x = row $ map f (toColumns x)
 
 mean, std :: Matrix Double -> Matrix Double
-mean = columnStats Stats.mean
-std = columnStats Stats.stdDev
+mean = columnWise Stats.mean
+std = columnWise Stats.stdDev
 
 plot :: [Attribute] -> Vector Double -> Vector Double -> IO ()
 plot attr x y = plotPathsStyle attr [(defaultStyle {plotType = Points, lineSpec = CustomStyle [LineType 2]}, zip (toList x) (toList y))]
@@ -40,3 +40,29 @@ plotLine x y = Plot2D.function Graph2D.lines x lookupValue
   where lookupValue v = maybe 0 id (lookup v (zip x y))
 
 
+plotFunction :: [Double] -> (Double -> Double) -> Plot2D.T Double Double
+plotFunction x f = Plot2D.function Graph2D.lines x f
+
+
+broadcast :: (Double -> Double) -> Matrix Double -> Matrix Double
+broadcast f m = fromRows $ map (cmap f) (toRows m)
+
+-- Type synonym for a cost function.
+type Cost =  Matrix Double            -- Parameters
+          -> Matrix Double            -- Features
+          -> Matrix Double            -- Labels
+          -> (Double, Matrix Double)  -- (Cost, Optimal theta)
+
+-- Stochastic gradient descent.
+sgd :: Matrix Double -- Features
+    -> Matrix Double -- Labels
+    -> Matrix Double -- Parameters
+    -> Cost          -- Cost function
+    -> Double        -- Learning Rate
+    -> Int           -- Number of Iterations
+    -> (Double, Matrix Double)
+sgd x y theta f alpha iterations
+  | iterations > 0   = sgd x y theta' f alpha (iterations - 1)
+  | otherwise        = (cost , theta)
+    where (cost, grad) = f theta x y
+          theta' = theta - (scalar alpha * (tr grad))

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b3522ccf4cae210f978bf01a76f71003ca9f1e0e1cf067376b342c9986a4d2fb
+-- hash: 31dbf78aa1a97ad1d548f0787ceefc7c36bf08d11df21d1edc0f12325400e841
 
 name:           CourseraMachineLearning
 version:        0.1.0.0
@@ -26,17 +26,33 @@ source-repository head
 
 library
   exposed-modules:
+      HVX
+      HVX.Internal.Constraints
+      HVX.Internal.DCP
+      HVX.Internal.Matrix
+      HVX.Internal.Primitives
+      HVX.Internal.Solvers
+      HVX.Internal.SymbolicSubgrad
+      HVX.Internal.TestUtil
+      HVX.Internal.Util
+      HVX.Primitives
       LinearRegression
+      LogisticRegression
       Util
   other-modules:
       Paths_CourseraMachineLearning
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , deepseq
     , directory
     , gnuplot
     , hmatrix
+    , hmatrix-csv
     , ihaskell
     , ihaskell-gnuplot
     , statistics
@@ -46,16 +62,23 @@ library
 executable CourseraMachineLearning-exe
   main-is: Main.hs
   other-modules:
+      LinearRegressionExercise
+      LogisticRegressionExercise
       Paths_CourseraMachineLearning
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       CourseraMachineLearning
+    , QuickCheck
     , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , deepseq
     , directory
     , gnuplot
     , hmatrix
+    , hmatrix-csv
     , ihaskell
     , ihaskell-gnuplot
     , statistics
@@ -72,10 +95,15 @@ test-suite CourseraMachineLearning-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       CourseraMachineLearning
+    , QuickCheck
     , base >=4.7 && <5
+    , bytestring
+    , cassava
+    , deepseq
     , directory
     , gnuplot
     , hmatrix
+    , hmatrix-csv
     , ihaskell
     , ihaskell-gnuplot
     , statistics
