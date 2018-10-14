@@ -86,6 +86,7 @@ exerciseTwo = do
   -- Compute and display cost and gradient with non-zero theta.
   -- the learning rate was achieved through empirical tests.
   -- Gives theta closest to fminunc.
+  -- TODO(mchav): Find haskell optimisation library.
   let (_, theta) = sgd x y initialTheta costFunction 0.0041 1000000
   decisionBoundary <- plotDecisionBoundary theta x
   points <- plotData completeMatrix
